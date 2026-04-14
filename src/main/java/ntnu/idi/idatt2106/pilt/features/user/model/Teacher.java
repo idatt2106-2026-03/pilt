@@ -1,8 +1,7 @@
-package ntnu.idi.idatt2106.pilt.user;
+package ntnu.idi.idatt2106.pilt.features.user.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 

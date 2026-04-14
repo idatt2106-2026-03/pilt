@@ -1,10 +1,9 @@
-package ntnu.idi.idatt2106.pilt.user;
+package ntnu.idi.idatt2106.pilt.features.user.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.Objects;
 
 /**
  * Abstract class representing a user in the system. This class is extended by both Teacher and Student classes.
