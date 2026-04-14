@@ -2,8 +2,12 @@ package ntnu.idi.idatt2106.pilt.features.user.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "students")
 public class Student extends User {
 

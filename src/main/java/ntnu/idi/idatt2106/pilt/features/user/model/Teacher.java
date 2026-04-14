@@ -4,11 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Class representing a teacher in the system. This class extends the User class and adds specific attributes and relationships for teachers.
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "teachers")
 public class Teacher extends User {
 
