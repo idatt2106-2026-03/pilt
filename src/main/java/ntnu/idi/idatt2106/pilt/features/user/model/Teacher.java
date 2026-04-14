@@ -11,11 +11,14 @@ import lombok.Getter;
 import lombok.Setter;
 import ntnu.idi.idatt2106.pilt.features.classroom.Classroom;
 
+
 /**
  * Class representing a teacher in the system. This class extends the User class and adds specific
  * attributes and relationships for teachers.
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "teachers")
 @Getter
 @Setter

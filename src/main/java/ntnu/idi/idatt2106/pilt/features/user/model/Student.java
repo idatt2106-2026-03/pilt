@@ -4,8 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.Objects;
 import ntnu.idi.idatt2106.pilt.features.classroom.Classroom;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "students")
 public class Student extends User {
 
