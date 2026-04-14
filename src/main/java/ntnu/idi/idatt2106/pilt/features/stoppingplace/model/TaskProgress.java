@@ -1,5 +1,6 @@
 package ntnu.idi.idatt2106.pilt.features.stoppingplace.model;
 
+import ntnu.idi.idatt2106.pilt.features.user.model.Student;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
