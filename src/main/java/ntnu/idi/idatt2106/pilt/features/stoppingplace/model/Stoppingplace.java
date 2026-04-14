@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Represents a location in the game where a player can stop and perfrom a task.
+ * Represents a location in the game where a player can stop and perform a task.
  *
  * <p>
  * A Stoppingplace contains a task that is triggered when a player enters the
