@@ -23,7 +23,7 @@ public class TaskProgress {
   private Long id;
 
   @ManyToOne
-  private Player player;
+  private Student student;
 
   @ManyToOne
   private Task task;
