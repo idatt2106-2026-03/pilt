@@ -15,7 +15,6 @@ import java.util.Optional;
 @Repository
 public interface NotebookRepository {
 
-
     List<Notebook> findAllByStudentOrderByStoppingPlaceOrderIndexAsc(Student student);
 
     Optional<Notebook> findByStudentAndStoppingPlace(Student student, Stoppingplace stoppingPlace);
