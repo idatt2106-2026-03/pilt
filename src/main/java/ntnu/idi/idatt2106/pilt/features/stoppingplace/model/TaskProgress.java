@@ -40,6 +40,7 @@ public class TaskProgress {
    * Time of task completion.
    **/
   @Getter
+  @Setter
   private LocalDateTime completedAt;
 
   public TaskProgress(Student student, Task task) {
