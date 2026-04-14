@@ -9,16 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * Track a players progress of a task.
  **/
 @Entity
+@NoArgsConstructor
 public class TaskProgress {
-  /**
-   * Unique identifier for the task.
-   */
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
@@ -37,21 +37,13 @@ public class TaskProgress {
   private TaskStatus taskStatus;
 
   /**
-   * Star rating (0–3).
-   */
-  @Getter
-  @Setter
-  private int stars;
-
-  /**
-   * Track progress steps.
-   **/
-  @Getter
-  private int progress;
-
-  /**
    * Time of task completion.
    **/
   @Getter
-  private LocalDateTime completedA;
+  private LocalDateTime completedAt;
+
+  public TaskProgress(Student student, Task task) {
+    this.student = student;
+    this.task = task;
+  }
 }
