@@ -20,6 +20,7 @@ import lombok.Setter;
  * @see Task
  **/
 @Entity
+@Getter
 public class Stoppingplace {
 
   /**
