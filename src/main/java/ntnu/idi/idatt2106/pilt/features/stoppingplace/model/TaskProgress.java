@@ -4,6 +4,8 @@ import ntnu.idi.idatt2106.pilt.features.user.model.Student;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Track a players progress of a task.
+ * Track a player's progress of a task.
  **/
 @Entity
 @NoArgsConstructor
@@ -34,6 +36,7 @@ public class TaskProgress {
    */
   @Getter
   @Setter
+  @Enumerated(EnumType.STRING)
   private TaskStatus taskStatus;
 
   /**
