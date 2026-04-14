@@ -1,11 +1,17 @@
 package ntnu.idi.idatt2106.pilt.features.user.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import java.util.Objects;
-import ntnu.idi.idatt2106.pilt.features.classroom.Classroom;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import ntnu.idi.idatt2106.pilt.features.classroom.Classroom;
 
 @Entity
 @Getter
