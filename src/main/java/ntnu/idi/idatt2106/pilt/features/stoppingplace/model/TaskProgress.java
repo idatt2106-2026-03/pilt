@@ -46,5 +46,6 @@ public class TaskProgress {
   public TaskProgress(Student student, Task task) {
     this.student = student;
     this.task = task;
+    this.taskStatus = TaskStatus.NOT_STARTED;
   }
 }
