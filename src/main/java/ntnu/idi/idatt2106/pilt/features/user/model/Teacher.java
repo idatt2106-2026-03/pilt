@@ -17,8 +17,6 @@ import ntnu.idi.idatt2106.pilt.features.classroom.Classroom;
  * attributes and relationships for teachers.
  */
 @Entity
-@Getter
-@Setter
 @Table(name = "teachers")
 @Getter
 @Setter
