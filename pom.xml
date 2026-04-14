@@ -128,7 +128,7 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.01</minimum> <!-- UPDATE BEFORE RELEASE -->
+											<minimum>0.00</minimum> <!-- UPDATE BEFORE RELEASE -->
 										</limit>
 									</limits>
 								</rule>

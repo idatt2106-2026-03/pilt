@@ -8,9 +8,7 @@ on:
 
 jobs:
 
-  # ──────────────────────────────────────────────
   # Job 1: Build & Test — the core pipeline
-  # ──────────────────────────────────────────────
   build:
     name: Build & Test
     runs-on: ubuntu-latest
@@ -32,7 +30,7 @@ jobs:
       - name: Build and run tests
         run: ./mvnw -B verify -Dspring.profiles.active=test
 
-      # ── Test Report ──
+      # Test Report
       # Shows individual test results directly in the GitHub Actions UI
       - name: Publish test results
         uses: dorny/test-reporter@v1
@@ -42,7 +40,7 @@ jobs:
           path: target/surefire-reports/*.xml
           reporter: java-junit
 
-      # ── Coverage Report ──
+      # Coverage Report
       # Posts a coverage summary as a comment on PRs
       - name: Upload JaCoCo coverage report
         uses: actions/upload-artifact@v4
@@ -63,9 +61,7 @@ jobs:
           title: "Backend Test Coverage"
           update-comment: true
 
-  # ──────────────────────────────────────────────
   # Job 2: Code Quality — static analysis
-  # ──────────────────────────────────────────────
   code-quality:
     name: Code Quality
     runs-on: ubuntu-latest
@@ -90,9 +86,7 @@ jobs:
       - name: Run SpotBugs analysis
         run: ./mvnw -B compile spotbugs:check -Dspring.profiles.active=test
 
-  # ──────────────────────────────────────────────
   # Job 3: Security — dependency vulnerability scan
-  # ──────────────────────────────────────────────
   security:
     name: Security Scan
     runs-on: ubuntu-latest
