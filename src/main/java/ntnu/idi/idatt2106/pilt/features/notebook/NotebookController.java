@@ -41,9 +41,12 @@ public class NotebookController {
 
     private final NotebookService notebookService;
 
+<<<<<<< Updated upstream
     // ========================
     // Student endpoints
     // ========================
+=======
+>>>>>>> Stashed changes
 
     /**
      * Returns all notebook entries for the authenticated student.
@@ -157,10 +160,13 @@ public class NotebookController {
         return notebookService.writeReflection(student, request);
     }
 
+<<<<<<< Updated upstream
     // ========================
     // Teacher endpoints
     // ========================
 
+=======
+>>>>>>> Stashed changes
     /**
      * Returns all notebook entries for a specific student (teacher view).
      */
@@ -260,10 +266,13 @@ public class NotebookController {
         return notebookService.getReflectionsForClassroom(classroomId);
     }
 
+<<<<<<< Updated upstream
     // ========================
     // Helpers
     // ========================
 
+=======
+>>>>>>> Stashed changes
     /**
      * Extracts the Student from the authenticated principal.
      * Throws 403 if the user is not a student.
