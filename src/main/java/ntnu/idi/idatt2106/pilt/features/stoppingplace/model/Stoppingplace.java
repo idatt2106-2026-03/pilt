@@ -6,7 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * Represents a location in the game where a player can stop and perform a task.
@@ -20,6 +22,9 @@ import lombok.Setter;
  * @see Task
  **/
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Stoppingplace {
 
   /**
@@ -32,7 +37,6 @@ public class Stoppingplace {
   /**
    * Name of the stopping place.
    */
-  @Getter
   private String name;
 
   /**
@@ -44,15 +48,9 @@ public class Stoppingplace {
   /**
    * If a task is locked or open.
    **/
-  @Getter
-  @Setter
   private boolean locked;
 
-  @Getter
   private int requiredStars;
-
-  protected Stoppingplace() {
-  }
 
   public Stoppingplace(String name, Task task, int requiredStars) {
     this.name = name;
