@@ -1,5 +1,16 @@
 package ntnu.idi.idatt2106.pilt.features.notebook;
 
+import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,18 +25,6 @@ import ntnu.idi.idatt2106.pilt.features.auth.UserPrincipal;
 import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookRequest;
 import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookResponse;
 import ntnu.idi.idatt2106.pilt.features.user.model.Student;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * REST controller for notebook operations.
@@ -40,13 +39,6 @@ import java.util.List;
 public class NotebookController {
 
     private final NotebookService notebookService;
-
-<<<<<<< Updated upstream
-    // ========================
-    // Student endpoints
-    // ========================
-=======
->>>>>>> Stashed changes
 
     /**
      * Returns all notebook entries for the authenticated student.
@@ -115,7 +107,7 @@ public class NotebookController {
         @PathVariable Long stoppingPlaceId
     ) {
         Student student = requireStudent(principal);
-        return notebookService.getNotebookEntry(student, stoppingPlaceId);
+        return null;//notebookService.getNotebookEntry(student, stoppingPlaceId);
     }
 
     /**
@@ -157,16 +149,9 @@ public class NotebookController {
         @Valid @RequestBody NotebookRequest request
     ) {
         Student student = requireStudent(principal);
-        return notebookService.writeReflection(student, request);
+        return null;//notebookService.writeReflection(student, request);
     }
 
-<<<<<<< Updated upstream
-    // ========================
-    // Teacher endpoints
-    // ========================
-
-=======
->>>>>>> Stashed changes
     /**
      * Returns all notebook entries for a specific student (teacher view).
      */
@@ -200,7 +185,7 @@ public class NotebookController {
         @Parameter(description = "ID of the student", example = "12")
         @PathVariable Long studentId
     ) {
-        return notebookService.getNotebooksForStudentAsTeacher(studentId);
+        return null;// notebookService.getNotebooksForStudentAsTeacher(studentId);
     }
 
     /**
@@ -266,13 +251,6 @@ public class NotebookController {
         return notebookService.getReflectionsForClassroom(classroomId);
     }
 
-<<<<<<< Updated upstream
-    // ========================
-    // Helpers
-    // ========================
-
-=======
->>>>>>> Stashed changes
     /**
      * Extracts the Student from the authenticated principal.
      * Throws 403 if the user is not a student.

@@ -1,21 +1,17 @@
 package ntnu.idi.idatt2106.pilt.features.notebook;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import ntnu.idi.idatt2106.pilt.core.dto.ApiResponse;
-import ntnu.idi.idatt2106.pilt.core.exception.ResourceNotFoundException;
-import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookMapper;
-import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookRequest;
-import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookResponse;
-import ntnu.idi.idatt2106.pilt.features.stoppingplace.StoppingplaceRepository;
-import ntnu.idi.idatt2106.pilt.features.stoppingplace.model.Stoppingplace;
-import ntnu.idi.idatt2106.pilt.features.user.UserRepository;
-import ntnu.idi.idatt2106.pilt.features.user.model.Student;
-import ntnu.idi.idatt2106.pilt.features.user.model.User;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import ntnu.idi.idatt2106.pilt.core.dto.ApiResponse;
+import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookMapper;
+import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookResponse;
+import ntnu.idi.idatt2106.pilt.features.user.model.Student;
+//import ntnu.idi.idatt2106.pilt.features.user.model.User;
 
 /**
  * Service layer for notebook operations.
@@ -35,8 +31,8 @@ import java.util.List;
 public class NotebookService {
 
     private final NotebookRepository notebookRepository;
-    private final StoppingplaceRepository stoppingplaceRepository;
-    private final UserRepository userRepository;
+    //private final StoppingplaceRepository stoppingplaceRepository;
+    //private final UserRepository userRepository;
     private final NotebookMapper notebookMapper;
 
     /**
@@ -65,7 +61,7 @@ public class NotebookService {
      * @param stoppingPlaceId the stoppested to view
      * @return the notebook entry for that stoppested
      * @throws ResourceNotFoundException if no entry exists yet
-     */
+
     @Transactional(readOnly = true)
     public ApiResponse<NotebookResponse> getNotebookEntry(Student student, Long stoppingPlaceId) {
         Stoppingplace stoppingPlace = findStoppingPlaceOrThrow(stoppingPlaceId);
@@ -78,7 +74,7 @@ public class NotebookService {
                 });
 
         return ApiResponse.ok(notebookMapper.toResponse(notebook));
-    }
+    }     */
 
     /**
      * Writes or updates a student's reflection for a stoppested.
@@ -86,7 +82,7 @@ public class NotebookService {
      * @param student the authenticated student
      * @param request contains stoppingPlaceId and the reflection text
      * @return the updated notebook entry
-     */
+
     public ApiResponse<NotebookResponse> writeReflection(Student student, NotebookRequest request) {
         Stoppingplace stoppingPlace = findStoppingPlaceOrThrow(request.stoppingPlaceId());
         log.info("Writing reflection for student: {}, stoppested: {}", student.getFeideUsername(), stoppingPlace.getName());
@@ -100,7 +96,7 @@ public class NotebookService {
 
         Notebook saved = notebookRepository.save(notebook);
         return ApiResponse.ok("Reflection saved", notebookMapper.toResponse(saved));
-    }
+    }     */
 
 
     /**
@@ -109,7 +105,7 @@ public class NotebookService {
      * @param student        the student who completed the task
      * @param stoppingPlace  the stoppested the task belongs to
      * @param tip            the tip text to add
-     */
+     
     public void addTip(Student student, Stoppingplace stoppingPlace, String tip) {
         log.info("Adding tip for student: {}, stoppested: {}", student.getFeideUsername(), stoppingPlace.getName());
         Notebook notebook = notebookRepository
@@ -129,7 +125,7 @@ public class NotebookService {
         }
 
         notebookRepository.save(notebook);
-    }
+    }*/
 
     /**
      * Returns all notebook entries for a specific student (teacher view).
@@ -137,13 +133,13 @@ public class NotebookService {
      * @param studentId the ID of the student whose notebook to view
      * @return list of notebook entries ordered by map position
      * @throws ResourceNotFoundException if the student does not exist
-     */
+     *
     @Transactional(readOnly = true)
     public ApiResponse<List<NotebookResponse>> getNotebooksForStudentAsTeacher(Long studentId) {
         Student student = findStudentOrThrow(studentId);
         log.info("Teacher fetching notebook entries for student: {}", student.getFeideUsername());
         return getNotebooksForStudent(student);
-    }
+    }*/
 
     /**
      * Returns all notebook entries for all students in a classroom.
@@ -181,7 +177,7 @@ public class NotebookService {
         return ApiResponse.ok(entries);
     }
 
-
+    /*
     private Student findStudentOrThrow(Long studentId) {
         User user = userRepository.findById(studentId)
             .orElseThrow(() -> {
@@ -195,7 +191,7 @@ public class NotebookService {
         }
         return student;
     }
-
+    /*
     private Stoppingplace findStoppingPlaceOrThrow(Long stoppingPlaceId) {
         log.info("Looking up stoppested with id: {}", stoppingPlaceId);
         return stoppingplaceRepository
@@ -205,5 +201,5 @@ public class NotebookService {
                 return new ResourceNotFoundException(
                         "Stoppested not found: " + stoppingPlaceId);
             });
-    }
+    }*/
 }
