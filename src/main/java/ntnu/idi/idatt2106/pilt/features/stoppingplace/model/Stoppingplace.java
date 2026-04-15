@@ -52,9 +52,6 @@ public class Stoppingplace {
 
   private int requiredStars;
 
-  protected Stoppingplace() {
-  }
-
   public Stoppingplace(String name, Task task, int requiredStars) {
     this.name = name;
     this.task = task;
