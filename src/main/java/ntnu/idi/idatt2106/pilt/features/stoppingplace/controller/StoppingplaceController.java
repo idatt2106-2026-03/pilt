@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("api/stoppingplace")
+@RequiredArgsConstructor
 public class StoppingplaceController {
 
   private final StoppingplaceService stoppingplaceService;
