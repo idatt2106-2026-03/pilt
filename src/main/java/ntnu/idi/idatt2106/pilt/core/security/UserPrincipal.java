@@ -1,4 +1,4 @@
-package ntnu.idi.idatt2106.pilt.features.auth;
+package ntnu.idi.idatt2106.pilt.core.security;
 
 import ntnu.idi.idatt2106.pilt.features.user.model.Student;
 import ntnu.idi.idatt2106.pilt.features.user.model.Teacher;
