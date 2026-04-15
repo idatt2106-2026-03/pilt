@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ntnu.idi.idatt2106.pilt.core.dto.ApiResponse;
 import ntnu.idi.idatt2106.pilt.core.exception.ForbiddenException;
-import ntnu.idi.idatt2106.pilt.features.auth.UserPrincipal;
+import ntnu.idi.idatt2106.pilt.core.security.UserPrincipal;
 import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookRequest;
 import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookResponse;
 import ntnu.idi.idatt2106.pilt.features.user.model.Student;
