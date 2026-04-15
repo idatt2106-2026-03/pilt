@@ -107,7 +107,7 @@ public class NotebookController {
         @PathVariable Long stoppingPlaceId
     ) {
         Student student = requireStudent(principal);
-        return null;//notebookService.getNotebookEntry(student, stoppingPlaceId);
+        return notebookService.getNotebookEntry(student, stoppingPlaceId);
     }
 
     /**
@@ -149,7 +149,7 @@ public class NotebookController {
         @Valid @RequestBody NotebookRequest request
     ) {
         Student student = requireStudent(principal);
-        return null;//notebookService.writeReflection(student, request);
+        return notebookService.writeReflection(student, request);
     }
 
     /**
@@ -185,7 +185,7 @@ public class NotebookController {
         @Parameter(description = "ID of the student", example = "12")
         @PathVariable Long studentId
     ) {
-        return null;// notebookService.getNotebooksForStudentAsTeacher(studentId);
+        return notebookService.getNotebooksForStudentAsTeacher(studentId);
     }
 
     /**
