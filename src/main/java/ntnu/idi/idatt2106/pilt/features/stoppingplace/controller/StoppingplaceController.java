@@ -14,8 +14,11 @@ import java.util.List;
 
 /**
  * REST Controller for {@link Stoppingplace} endpoints.
- * * <p>Provides an API for the frontend to query game locations and 
- * retrieve associated tasks for the player.</p>
+ * *
+ * <p>
+ * Provides an API for the frontend to query game locations and
+ * retrieve associated tasks for the player.
+ * </p>
  */
 @RestController
 @RequestMapping("api/stoppingplace")
@@ -38,4 +41,4 @@ public class StoppingplaceController {
     Task task = stoppingplaceService.getTaskForStoppingplace(id);
     return ResponseEntity.ok(task);
   }
-}}
+}
