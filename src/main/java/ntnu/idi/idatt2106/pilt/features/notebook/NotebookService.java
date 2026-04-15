@@ -9,12 +9,13 @@ import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookRequest;
 import ntnu.idi.idatt2106.pilt.features.notebook.dto.NotebookResponse;
 import ntnu.idi.idatt2106.pilt.features.stoppingplace.StoppingplaceRepository;
 import ntnu.idi.idatt2106.pilt.features.stoppingplace.model.Stoppingplace;
+import ntnu.idi.idatt2106.pilt.features.user.UserRepository;
 import ntnu.idi.idatt2106.pilt.features.user.model.Student;
+import ntnu.idi.idatt2106.pilt.features.user.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Service layer for notebook operations.
@@ -35,6 +36,7 @@ public class NotebookService {
 
     private final NotebookRepository notebookRepository;
     private final StoppingplaceRepository stoppingplaceRepository;
+    private final UserRepository userRepository;
     private final NotebookMapper notebookMapper;
 
     /**
@@ -130,13 +132,15 @@ public class NotebookService {
     }
 
     /**
-     * Returns all notebook entries for a specific student.
+     * Returns all notebook entries for a specific student (teacher view).
      *
-     * @param student the student whose notebook to view
+     * @param studentId the ID of the student whose notebook to view
      * @return list of notebook entries ordered by map position
+     * @throws ResourceNotFoundException if the student does not exist
      */
     @Transactional(readOnly = true)
-    public ApiResponse<List<NotebookResponse>> getNotebooksForStudentAsTeacher(Student student) {
+    public ApiResponse<List<NotebookResponse>> getNotebooksForStudentAsTeacher(Long studentId) {
+        Student student = findStudentOrThrow(studentId);
         log.info("Teacher fetching notebook entries for student: {}", student.getFeideUsername());
         return getNotebooksForStudent(student);
     }
@@ -178,14 +182,28 @@ public class NotebookService {
     }
 
 
+    private Student findStudentOrThrow(Long studentId) {
+        User user = userRepository.findById(studentId)
+            .orElseThrow(() -> {
+                log.warn("User not found with id: {}", studentId);
+                return new ResourceNotFoundException("Student not found: " + studentId);
+            });
+
+        if (!(user instanceof Student student)) {
+            log.warn("User {} is not a student", studentId);
+            throw new ResourceNotFoundException("Student not found: " + studentId);
+        }
+        return student;
+    }
+
     private Stoppingplace findStoppingPlaceOrThrow(Long stoppingPlaceId) {
         log.info("Looking up stoppested with id: {}", stoppingPlaceId);
         return stoppingplaceRepository
             .findById(stoppingPlaceId)
             .orElseThrow(() -> {
                 log.warn("Stoppested not found with id: {}", stoppingPlaceId);
-                new ResourceNotFoundException(
-                        "Stoppested not found: " + stoppingPlaceId)
+                return new ResourceNotFoundException(
+                        "Stoppested not found: " + stoppingPlaceId);
             });
     }
 }
