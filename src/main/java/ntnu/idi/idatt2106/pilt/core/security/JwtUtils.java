@@ -29,27 +29,46 @@ public class JwtUtils {
   @Value("${jwt.expirationMs:86400000}")
   private int jwtExpirationMs;
 
+  @Value("${jwt.issuer:pilt-api}")
+  private String jwtIssuer;
+
+  @Value("${jwt.audience:pilt-client}")
+  private String jwtAudience;
+
   public String generateJwtToken(Authentication authentication) {
     if (authentication == null || !(authentication.getPrincipal() instanceof UserPrincipal userPrincipal)) {
       throw new IllegalArgumentException("Authentication principal must be a UserPrincipal");
     }
 
     return Jwts.builder()
-        .setSubject(userPrincipal.getUsername())
+        .setSubject(userPrincipal.getUserId().toString())
+        .setIssuer(jwtIssuer)
+        .setAudience(jwtAudience)
         .claim("userId", userPrincipal.getUserId())
+        .claim("role", userPrincipal.getAuthorities().iterator().next().getAuthority())
         .setIssuedAt(new Date())
         .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
         .signWith(key(), SignatureAlgorithm.HS256)
         .compact();
   }
 
-  public String getUserNameFromJwtToken(String token) {
-    return parseClaims(token).getBody().getSubject();
-  }
-
   public Long getUserIdFromJwtToken(String token) {
     Claims claims = parseClaims(token).getBody();
-    return claims.get("userId", Long.class);
+    Long userId = claims.get("userId", Long.class);
+    if (userId != null) {
+      return userId;
+    }
+
+    String subject = claims.getSubject();
+    if (subject == null || subject.isBlank()) {
+      throw new IllegalArgumentException("JWT token does not contain a user id");
+    }
+
+    try {
+      return Long.parseLong(subject);
+    } catch (NumberFormatException ex) {
+      throw new IllegalArgumentException("JWT subject is not a valid user id", ex);
+    }
   }
 
   public boolean validateJwtToken(String authToken) {
@@ -58,7 +77,8 @@ public class JwtUtils {
     }
 
     try {
-      parseClaims(authToken);
+      Claims claims = parseClaims(authToken).getBody();
+      validateContextClaims(claims);
       return true;
     } catch (SecurityException | MalformedJwtException e) {
       log.debug("Invalid JWT signature or format");
@@ -73,6 +93,16 @@ public class JwtUtils {
     }
 
     return false;
+  }
+
+  private void validateContextClaims(Claims claims) {
+    if (!jwtIssuer.equals(claims.getIssuer())) {
+      throw new IllegalArgumentException("JWT issuer is invalid");
+    }
+
+    if (!jwtAudience.equals(claims.getAudience())) {
+      throw new IllegalArgumentException("JWT audience is invalid");
+    }
   }
 
   private Jws<Claims> parseClaims(String token) {
