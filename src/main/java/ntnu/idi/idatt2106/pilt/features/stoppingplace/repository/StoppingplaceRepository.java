@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface StoppingplaceRepository extends JpaRepository<Stoppingplace, Long> {
 
-  List<Stoppingplace> findByUnlocked();
+  List<Stoppingplace> findByLocked(boolean locked);
 
   List<Stoppingplace> findByRequiredStarsLessThanEqual(int stars);
 }

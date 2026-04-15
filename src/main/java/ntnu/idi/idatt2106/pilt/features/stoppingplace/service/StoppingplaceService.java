@@ -35,9 +35,7 @@ public class StoppingplaceService {
    * Business Logic: Get all places that are currently unlocked.
    */
   public List<Stoppingplace> getAllUnlockedPlaces() {
-    return stoppingplaceRepository.findAll().stream()
-        .filter(place -> !place.isLocked())
-        .toList();
+    return stoppingplaceRepository.findByLocked(false);
   }
 
   /**
